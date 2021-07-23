@@ -2,6 +2,8 @@ import React from "react";
 import Nav from "./Nav";
 import HogTiles from "./HogTiles";
 import hogs from "../porkers_data";
+import FilterForm from "./FilterForm";
+
 
 function App() {
 
@@ -9,6 +11,10 @@ function App() {
 	return (
 		<div className="App">
 			<Nav />
+			<FilterForm />
+			<br/>
+			<hr/>
+			<br/>
 			<HogTiles 
 				hogs={hogs}
 			/>
