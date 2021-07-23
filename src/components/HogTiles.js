@@ -1,5 +1,4 @@
 import HogTile from "./HogTile";
-
 function HogTiles({hogs}) {
     return (
         <div class="ui grid container">
@@ -20,5 +19,4 @@ function HogTiles({hogs}) {
         </div>
     );
 }
-
 export default HogTiles;

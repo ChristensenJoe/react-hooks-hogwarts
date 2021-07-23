@@ -3,6 +3,7 @@ import Nav from "./Nav";
 import HogTiles from "./HogTiles";
 import hogs from "../porkers_data";
 import FilterForm from "./FilterForm";
+import CreateHogForm from "./CreateHogForm";
 
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
 		<div className="App">
 			<Nav />
 			<FilterForm />
+			<br/>
+			<CreateHogForm/>
 			<br/>
 			<hr/>
 			<br/>

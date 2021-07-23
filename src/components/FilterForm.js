@@ -1,6 +1,8 @@
 
 function FilterForm (){
     return (
+        <div>
+            <h2>Filter Hogs</h2>
         <form>
             <label>
                 Search:
@@ -15,6 +17,7 @@ function FilterForm (){
             </select>
 
         </form>
+        </div>
 
     );
 
