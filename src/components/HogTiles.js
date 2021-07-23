@@ -1,9 +1,29 @@
 import HogTile from "./HogTile";
-function HogTiles({hogs}) {
+function HogTiles({hogs, filterObj, handleFilterForm}) {
+    
+
+    const filteredHogs = hogs.filter((hog) => {
+        if(filterObj.greased === "false") {
+            return true;
+        }
+        else{
+            if(hog.greased) return true;
+            return false;
+        }
+    }).filter((hog) => {
+        if(filterObj.search === "") {
+            return true;
+        }
+        else {
+            if(hog.name.toLowerCase().includes(filterObj.search.toLowerCase())) return true;
+            return false;
+        }
+    });
+
     return (
-        <div class="ui grid container">
+        <div className="ui grid container">
             {
-                hogs.map((hog) => {
+                filteredHogs.map((hog) => {
                     return (
                         <HogTile 
                             name={hog.name}
@@ -12,6 +32,7 @@ function HogTiles({hogs}) {
                             weight={hog.weight}
                             highestMedal={hog["highest medal achieved"]}
                             image={hog.image}
+                            key={hog.name}
                         />
                     );
                 })

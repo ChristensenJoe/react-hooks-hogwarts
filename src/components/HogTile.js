@@ -9,9 +9,6 @@ function HogTile({ name, specialty, greased, weight, highestMedal, image }) {
                 </div>
                 <div className="content">
                     <span className="header">{name}</span>
-                    <div className="meta">
-                        <span className="date">{greased}</span>
-                    </div>
                     <div className="description">
                         {`Specialty: ${specialty}`}
                     </div>
@@ -21,7 +18,7 @@ function HogTile({ name, specialty, greased, weight, highestMedal, image }) {
                 </div>
                 <div className="extra content">
                     <span>
-                        Toggle Greased
+                        {greased ? `Is Greased` : `Is not Greased`}
                     </span>
                 </div>
             </div>

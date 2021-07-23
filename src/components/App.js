@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Nav from "./Nav";
 import HogTiles from "./HogTiles";
 import hogs from "../porkers_data";
@@ -7,12 +7,31 @@ import CreateHogForm from "./CreateHogForm";
 
 
 function App() {
+	const [filterObj, setFilterObj] = useState({
+		search: "",
+		greased: "false"
+	});
 
+	function handleFilterInput(event) {
+        setFilterObj((filterObj) => {
+            return {
+                ...filterObj,
+                [event.target.name]: event.target.value
+            }
+        })
+    } 
+
+	function handleFilterHogs(filterObj) {
+
+	}
 
 	return (
 		<div className="App">
 			<Nav />
-			<FilterForm />
+			<FilterForm 
+				handleFilterInput={handleFilterInput}
+				filterObj={filterObj}
+			/>
 			<br/>
 			<CreateHogForm/>
 			<br/>
@@ -20,6 +39,7 @@ function App() {
 			<br/>
 			<HogTiles 
 				hogs={hogs}
+				filterObj={filterObj}
 			/>
 			{
 				//App
