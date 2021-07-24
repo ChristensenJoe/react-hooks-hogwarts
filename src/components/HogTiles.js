@@ -1,8 +1,10 @@
 import HogTile from "./HogTile";
-function HogTiles({hogs, filterObj, handleFilterForm}) {
-    
 
-    const filteredHogs = hogs.filter((hog) => {
+function HogTiles({hogs, filterObj, sort, handleHideHogClick, isHogHidden}) {
+
+
+    const filteredHogs = 
+    hogs.filter((hog) => {
         if(filterObj.greased === "false") {
             return true;
         }
@@ -18,7 +20,15 @@ function HogTiles({hogs, filterObj, handleFilterForm}) {
             if(hog.name.toLowerCase().includes(filterObj.search.toLowerCase())) return true;
             return false;
         }
+    }).filter((hog) => {
+        if(isHogHidden[hog.name]) {
+            return false;
+        }
+        return true;
     });
+
+    (sort==="name") ? 
+    filteredHogs.sort((a,b) => (a.name > b.name) ? 1 : -1) : filteredHogs.sort((a,b) => (a.weight > b.weight) ? 1 : -1)
 
     return (
         <div className="ui grid container">
@@ -33,6 +43,7 @@ function HogTiles({hogs, filterObj, handleFilterForm}) {
                             highestMedal={hog["highest medal achieved"]}
                             image={hog.image}
                             key={hog.name}
+                            handleHideHogClick={handleHideHogClick}
                         />
                     );
                 })

@@ -4,6 +4,7 @@ import HogTiles from "./HogTiles";
 import hogs from "../porkers_data";
 import FilterForm from "./FilterForm";
 import CreateHogForm from "./CreateHogForm";
+import SortButtons from "./SortButtons";
 
 
 function App() {
@@ -11,6 +12,55 @@ function App() {
 		search: "",
 		greased: "false"
 	});
+	const [sort, setSort] = useState("name");
+	const [newHog, setNewHog] = useState({
+		name: "",
+    	specialty: "",
+    	greased: true,
+    	weight: "",
+    	"highest medal achieved": "",
+    	image: ""
+	});
+	const [allHogs, setAllHogs] = useState(hogs);
+	
+	const [isHogHidden, setIsHogHidden] = useState({});
+
+    function handleHideHogClick(name) {
+        setIsHogHidden((isHogHidden) => {
+            return {
+                ...isHogHidden,
+                [name] : true
+            }
+        })
+    }
+
+	function onShowPigs() {
+		setIsHogHidden([]);
+	}
+
+	function handleNewHogInput(event) {
+		setNewHog((newHog) => {
+			return {
+				...newHog,
+				[event.target.name]: ((event.target.name==="greased") ? 
+				(event.target.value==="greased") ? true : false
+				: event.target.value)
+			}
+		})
+	}
+
+	function handleNewHogSubmit(event) {
+		event.preventDefault();
+		setAllHogs((allHogs) => [...allHogs, newHog]);
+		setNewHog({
+			name: "",
+			specialty: "",
+			greased: true,
+			weight: "",
+			"highest medal achieved": "",
+			image: ""
+		});
+	}
 
 	function handleFilterInput(event) {
         setFilterObj((filterObj) => {
@@ -21,8 +71,8 @@ function App() {
         })
     } 
 
-	function handleFilterHogs(filterObj) {
-
+	function handleSort(event) {
+		setSort(event.target.name)
 	}
 
 	return (
@@ -33,13 +83,25 @@ function App() {
 				filterObj={filterObj}
 			/>
 			<br/>
-			<CreateHogForm/>
+			<CreateHogForm
+				newHog={newHog}
+				handleNewHogInput={handleNewHogInput}
+				handleNewHogSubmit={handleNewHogSubmit}
+			/>
 			<br/>
 			<hr/>
 			<br/>
+			<SortButtons 
+				onSortClick={handleSort}
+				onShowPigs={onShowPigs}
+			/>
+			<br/>
 			<HogTiles 
-				hogs={hogs}
+				hogs={allHogs}
 				filterObj={filterObj}
+				sort={sort}
+				isHogHidden={isHogHidden}
+				handleHideHogClick={handleHideHogClick}
 			/>
 			{
 				//App

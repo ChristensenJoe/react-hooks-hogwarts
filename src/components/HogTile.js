@@ -1,6 +1,6 @@
 import React from "react";
 
-function HogTile({ name, specialty, greased, weight, highestMedal, image }) {
+function HogTile({ name, specialty, greased, weight, highestMedal, image, handleHideHogClick }) {
     return (
         <div className="ui eight wide column">
             <div className="ui card">
@@ -15,10 +15,18 @@ function HogTile({ name, specialty, greased, weight, highestMedal, image }) {
                     <div className="description">
                         {`Highest Medal: ${highestMedal} | Weight: ${weight}`}
                     </div>
+                    <br/>
+                    <div className="meta">
+                        <span className="date">
+                            {greased ? `Is Greased` : `Is not Greased`}
+                        </span>
+                    </div>
                 </div>
-                <div className="extra content">
+                <div className="extra content" onClick={() => {
+                    handleHideHogClick(name);
+                }}>
                     <span>
-                        {greased ? `Is Greased` : `Is not Greased`}
+                        Hide Hog
                     </span>
                 </div>
             </div>

@@ -1,38 +1,39 @@
-function CreateHogForm() {
+function CreateHogForm({newHog, handleNewHogInput, handleNewHogSubmit}) {
     return (
         <div>
             <h2>Add New Hog</h2>
-            <form>
+            <form onSubmit={handleNewHogSubmit}>
                 <label>
                     Name:
-                    <input type="text" name="name" />
+                    <input onChange={handleNewHogInput} type="text" name="name" value={newHog.name}/>
                 </label>
 
                 <label>
                     Specialty:
-                    <input type="text" name="specialty" />
+                    <input onChange={handleNewHogInput} type="text" name="specialty" value={newHog.specialty}/>
                 </label>
 
                 <label>
                     Weight:
-                    <input type="text" name="weight" />
+                    <input onChange={handleNewHogInput} type="text" name="weight" value={newHog.weight}/>
                 </label>
 
                 <label>
                     Highest Medal:
-                    <input type="text" name="highest medal achieved" />
+                    <input onChange={handleNewHogInput} type="text" name="highest medal achieved" value={newHog["highest medal achieved"]}/>
                 </label>
 
                 <label>
                     Picture:
-                    <input type="text" name="image" />
+                    <input onChange={handleNewHogInput} type="text" name="image" value={newHog.image}/>
                 </label>
 
-                <select name='greased' >
+                <select onChange={handleNewHogInput} name='greased' >
                     <option value='greased' > Greased </option>
                     <option value='notGreased' >Not Greased </option>
-
                 </select>
+
+                <button type="submit">Add Hog</button>
 
 
 
